@@ -1,15 +1,16 @@
 package de.cms;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Arrays;
 
-public class SparkAppTest extends TestCase {
+public class SparkAppTest  {
 
+    @Test
     public void testApplyWork() throws Exception {
 
         SparkConf conf = new SparkConf().setAppName("Log Counter").setMaster("local");

@@ -26,7 +26,8 @@ public class StreamApp {
 
     }
 
-    public static JavaDStream<Long> applyWork(JavaReceiverInputDStream<String> lines) {
-        return lines.flatMap(o -> Arrays.asList(o.split(" "))).count();
+    public static JavaDStream<String> applyWork(JavaReceiverInputDStream<String> lines) {
+        JavaDStream<String> words = lines.flatMap(s -> Arrays.asList(s.split(" ")));
+        return words;
     }
 }
