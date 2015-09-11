@@ -22,15 +22,15 @@ public class TestServer extends Thread {
     }
 
     public TestServer() throws IOException {
-        serverSocket = new ServerSocket(9999);
+        serverSocket = new ServerSocket(0);
     }
 
     @Override
     public void run() {
-        Socket clientSocket = null;
+
         while (run) {
             try {
-                clientSocket = serverSocket.accept();
+                Socket clientSocket = serverSocket.accept();
                 clientSocket.setTcpNoDelay(true);
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 while (clientSocket.isConnected()) {
@@ -42,7 +42,7 @@ public class TestServer extends Thread {
                     }
                 }
             } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+                LOG.warn(e.getMessage(), e);
             }
         }
 
