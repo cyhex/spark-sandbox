@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PartsSeedsApp {
+public class SitemapSeederApp {
 
     private static final Logger log = LogManager.getLogger(PartsMapApp.class);
 
@@ -23,22 +23,30 @@ public class PartsSeedsApp {
 
         Document mainSiteMap = null;
         try {
-            mainSiteMap = Jsoup.connect("http://www.partsrunner.de/sitemaps/sitemap.xml").get();
+            mainSiteMap = Jsoup.connect("https://www.autoteile-guenstig.de/sitemap.xml").get();
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
 
-        List<String> loc = mainSiteMap.select("loc").stream().filter(Element::hasText)
+
+        if (mainSiteMap == null) {
+            log.warn("#####################################");
+            log.warn("fnothing to so " );
+            return;
+        }
+
+        List<String> loc  = mainSiteMap.select("loc").stream().filter(Element::hasText)
                 .map(Element::text).collect(Collectors.toList());
 
         JavaRDD<String> seedsRdd = sc.parallelize(loc)
+                .repartition(loc.size())
                 .flatMap(url -> Jsoup.connect(url).get().select("loc").stream()
                                 .map(Element::text).collect(Collectors.toList())
                 );
 
         log.warn("#####################################");
         log.warn("found seeds: " + seedsRdd.count());
-        seedsRdd.saveAsTextFile("/home/gx/Desktop/seeds.rdd");
+        seedsRdd.saveAsTextFile("/media/gx/Storage/crawl/seeds.rdd");
 
     }
 

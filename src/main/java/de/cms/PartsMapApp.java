@@ -18,18 +18,14 @@ public class PartsMapApp {
         SparkConf conf = new SparkConf().setAppName("Log Counter");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        FileUtils.deleteDirectory(new File("/home/gx/Desktop/html.rdd"));
+        FileUtils.deleteDirectory(new File("/media/gx/Storage/crawl/html.rdd"));
 
-        JavaRDD<String> seedsRdd = sc.textFile("/home/gx/Desktop/seeds.rdd");
-
+        JavaRDD<String> seedsRdd = sc.textFile("/media/gx/Storage/crawl/seeds.rdd");
         Fetcher fetcher = new Fetcher();
-
-        int pCount = (int) (seedsRdd.count() / 5) + 1;
-
-        seedsRdd.repartition(pCount)
+        seedsRdd.repartition((int) (seedsRdd.count() / 5))
                 .map(fetcher::fetch)
-                .filter(r -> r != null)
-                .saveAsTextFile("/home/gx/Desktop/html.rdd");
+                .filter(s -> s != null)
+                .saveAsTextFile("/media/gx/Storage/crawl/html.rdd");
 
     }
 
