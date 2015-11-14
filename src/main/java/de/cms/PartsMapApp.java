@@ -22,12 +22,10 @@ public class PartsMapApp {
 
         JavaRDD<String> seedsRdd = sc.textFile("/home/gx/Desktop/seeds.rdd");
 
-        Fetcher fetcher = new Fetcher();
 
         int pCount = (int) (seedsRdd.count() / 5) + 1;
 
         seedsRdd.repartition(pCount)
-                .map(fetcher::fetch)
                 .filter(r -> r != null)
                 .saveAsTextFile("/home/gx/Desktop/html.rdd");
 
