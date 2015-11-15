@@ -74,6 +74,7 @@ data
 
 # Mongo Explorer plugin:
 # .idea/mongoSettings.xml
+*.iml
 
 ## File-based project format:
 *.ipr
