@@ -1,11 +1,9 @@
-package de.texttech.csv;
+package de.texttech.csv.sandbox;
 
+import de.texttech.csv.utils.HdfsHelpers;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
-import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.DataFrame;
-import org.apache.spark.sql.SQLContext;
 import scala.Tuple2;
 
 import java.io.IOException;

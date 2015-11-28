@@ -1,7 +1,8 @@
-package de.texttech.csv;
+package de.texttech.csv.sandbox;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.SQLContext;
 
@@ -28,13 +29,9 @@ public class Merge {
                 .option("inferSchema", "true") // Automatically infer data types
                 .load("data/d2.csv");
 
-        DataFrame merged = csv.unionAll(csv2);
-        merged.sort("C0").write()
-                .format("com.databricks.spark.csv")
-                .save("data/merged.hdfs");
-        HdfsHelpers.copyMerge("data/merged.hdfs", "data/merged.csv");
-
-
+        //DataFrame mergedDF = csv.unionAll(csv2);
+        csv.groupBy("C0").avg("C1")
+                .show();
     }
 
 

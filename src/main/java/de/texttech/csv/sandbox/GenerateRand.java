@@ -1,11 +1,10 @@
-package de.texttech.csv;
+package de.texttech.csv.sandbox;
 
+import de.texttech.csv.utils.HdfsHelpers;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.DataFrame;
-import org.apache.spark.sql.SQLContext;
 
 import java.io.IOException;
 import java.util.ArrayList;

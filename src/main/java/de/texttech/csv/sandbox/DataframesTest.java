@@ -1,22 +1,12 @@
-package de.texttech.csv;
+package de.texttech.csv.sandbox;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
-import org.apache.spark.sql.DataFrame;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SQLContext;
-import scala.Function1;
-import scala.Tuple2;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataframesTest {
     private static final Logger log = LogManager.getLogger(DataframesTest.class);
