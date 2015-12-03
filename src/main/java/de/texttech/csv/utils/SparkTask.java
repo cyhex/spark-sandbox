@@ -9,7 +9,7 @@ public abstract class SparkTask implements Runnable {
 
     protected final JavaSparkContext sc;
 
-    protected SparkTask(JavaSparkContext sc) {
+    public SparkTask(JavaSparkContext sc) {
         this.sc = sc;
     }
 
