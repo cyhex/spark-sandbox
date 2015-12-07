@@ -15,7 +15,7 @@ public class SparkCsvOptions extends HashMap<String, String> {
         setHeader(true);
         setDelimiter(",");
         setCharset("UTF-8");
-        setInferSchema(true);
+        setInferSchema(false);
         setModePermissive();
     }
 
@@ -35,18 +35,31 @@ public class SparkCsvOptions extends HashMap<String, String> {
         put("charset", charset);
     }
 
+    /**
+     * tries to parse all lines: nulls are inserted for missing tokens and extra tokens are ignored.
+     */
     public void setModePermissive() {
         put("mode", MODE_PERMISSIVE);
     }
 
+    /**
+     * drops lines which have fewer or more tokens than expected or tokens which do not match the schema
+     */
     public void setModeDropmalformed() {
         put("mode", MODE_DROPMALFORMED);
     }
 
+    /**
+     * drops lines which have fewer or more tokens than expected or tokens which do not match the schema
+     */
     public void setModeFailfast() {
         put("mode", MODE_FAILFAST);
     }
 
+    /**
+     * automatically infers column types. It requires one extra pass over the data and is false by default
+     * @param inferSchema default false
+     */
     public void setInferSchema(boolean inferSchema) {
         put("inferSchema", inferSchema ? "true" : "false");
     }

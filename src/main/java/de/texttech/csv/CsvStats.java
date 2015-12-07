@@ -44,7 +44,7 @@ public class CsvStats extends SparkTask {
 
         SparkCsvOptions options = new SparkCsvOptions();
         options.setHeader(false);
-
+        options.setInferSchema(true);
         DataFrame csv = sqlContext.read().format("com.databricks.spark.csv")
                 .options(options)
                 .load("data/d3.csv");
